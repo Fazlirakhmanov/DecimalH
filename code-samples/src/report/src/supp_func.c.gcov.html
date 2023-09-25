@@ -1,0 +1,375 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>LCOV - gcov_test.info - src/supp_func.c</title>
+  <link rel="stylesheet" type="text/css" href="../gcov.css">
+</head>
+
+<body>
+
+          <table width="100%" border=0 cellspacing=0 cellpadding=0>
+            <tr><td class="title">LCOV - code coverage report</td></tr>
+            <tr><td class="ruler"><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+
+            <tr>
+              <td width="100%">
+                <table cellpadding=1 border=0 width="100%">
+          <tr>
+            <td width="10%" class="headerItem">Current view:</td>
+            <td width="10%" class="headerValue"><a href="../index.html">top level</a> - <a href="index.html">src</a> - supp_func.c<span style="font-size: 80%;"> (source / <a href="supp_func.c.func-c.html">functions</a>)</span></td>
+            <td width="5%"></td>
+            <td width="5%"></td>
+            <td width="5%" class="headerCovTableHead">Coverage</td>
+            <td width="5%" class="headerCovTableHead" title="Covered + Uncovered code">Total</td>
+            <td width="5%" class="headerCovTableHead" title="Exercised code only">Hit</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test:</td>
+            <td class="headerValue">gcov_test.info</td>
+            <td></td>
+            <td class="headerItem">Lines:</td>
+            <td class="headerCovTableEntryHi">97.1&nbsp;%</td>
+            <td class="headerCovTableEntry">243</td>
+            <td class="headerCovTableEntry">236</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test Date:</td>
+            <td class="headerValue">2023-08-20 18:44:56</td>
+            <td></td>
+            <td class="headerItem">Functions:</td>
+            <td class="headerCovTableEntryHi">100.0&nbsp;%</td>
+            <td class="headerCovTableEntry">19</td>
+            <td class="headerCovTableEntry">19</td>
+          </tr>
+                  <tr><td><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+                </table>
+              </td>
+            </tr>
+
+            <tr><td class="ruler"><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+          </table>
+
+          <table cellpadding=0 cellspacing=0 border=0>
+            <tr>
+              <td><br></td>
+            </tr>
+            <tr>
+              <td>
+<pre class="sourceHeading">            Line data    Source code</pre>
+<pre class="source">
+<span id="L1"><span class="lineNum">       1</span>              : #include &quot;supp_func.h&quot;</span>
+<span id="L2"><span class="lineNum">       2</span>              : </span>
+<span id="L3"><span class="lineNum">       3</span> <span class="tlaGNC tlaBgGNC">      342490 : int get_sign(uint32_t val) { return (val &gt;&gt; 31) &amp; 1; }</span></span>
+<span id="L4"><span class="lineNum">       4</span>              : </span>
+<span id="L5"><span class="lineNum">       5</span> <span class="tlaGNC">     2421382 : void set_bit(uint32_t *dst, int pos, int bit) {</span></span>
+<span id="L6"><span class="lineNum">       6</span> <span class="tlaGNC">     2421382 :   if (bit) {</span></span>
+<span id="L7"><span class="lineNum">       7</span> <span class="tlaGNC">     1025875 :     *dst |= (1 &lt;&lt; pos);</span></span>
+<span id="L8"><span class="lineNum">       8</span> <span class="tlaGNC">     1025875 :   } else {</span></span>
+<span id="L9"><span class="lineNum">       9</span> <span class="tlaGNC">     1395507 :     *dst &amp;= ~(1 &lt;&lt; pos);</span></span>
+<span id="L10"><span class="lineNum">      10</span>              :   }</span>
+<span id="L11"><span class="lineNum">      11</span> <span class="tlaGNC">     2421382 : }</span></span>
+<span id="L12"><span class="lineNum">      12</span>              : </span>
+<span id="L13"><span class="lineNum">      13</span> <span class="tlaGNC">      194209 : uint32_t get_exp(uint32_t val) {</span></span>
+<span id="L14"><span class="lineNum">      14</span> <span class="tlaGNC">      194209 :   val &lt;&lt;= 1;</span></span>
+<span id="L15"><span class="lineNum">      15</span> <span class="tlaGNC">      194209 :   val &gt;&gt;= 17;</span></span>
+<span id="L16"><span class="lineNum">      16</span> <span class="tlaGNC">      194209 :   return val;</span></span>
+<span id="L17"><span class="lineNum">      17</span>              : }</span>
+<span id="L18"><span class="lineNum">      18</span>              : </span>
+<span id="L19"><span class="lineNum">      19</span> <span class="tlaGNC">       91148 : void set_exp(uint32_t val, uint32_t *data) {</span></span>
+<span id="L20"><span class="lineNum">      20</span> <span class="tlaGNC">       91148 :   val &lt;&lt;= 16;</span></span>
+<span id="L21"><span class="lineNum">      21</span> <span class="tlaGNC">       91148 :   if (get_sign(*data)) {</span></span>
+<span id="L22"><span class="lineNum">      22</span> <span class="tlaUNC tlaBgUNC">           0 :     *data = val;</span></span>
+<span id="L23"><span class="lineNum">      23</span> <span class="tlaUNC">           0 :     set_bit(data, 31, 1);</span></span>
+<span id="L24"><span class="lineNum">      24</span> <span class="tlaUNC">           0 :   } else {</span></span>
+<span id="L25"><span class="lineNum">      25</span> <span class="tlaGNC tlaBgGNC">       91148 :     *data = val;</span></span>
+<span id="L26"><span class="lineNum">      26</span>              :   }</span>
+<span id="L27"><span class="lineNum">      27</span> <span class="tlaGNC">       91148 : }</span></span>
+<span id="L28"><span class="lineNum">      28</span>              : </span>
+<span id="L29"><span class="lineNum">      29</span> <span class="tlaGNC">         443 : int _x10(s21_big_decimal *dst) {</span></span>
+<span id="L30"><span class="lineNum">      30</span> <span class="tlaGNC">         443 :   int err = 1;</span></span>
+<span id="L31"><span class="lineNum">      31</span> <span class="tlaGNC">         443 :   err = shuffle_big_dec_left(dst);</span></span>
+<span id="L32"><span class="lineNum">      32</span> <span class="tlaGNC">         443 :   s21_big_decimal temp = *dst;</span></span>
+<span id="L33"><span class="lineNum">      33</span> <span class="tlaGNC">         443 :   err = shuffle_big_dec_left(&amp;temp);</span></span>
+<span id="L34"><span class="lineNum">      34</span> <span class="tlaGNC">         443 :   err = shuffle_big_dec_left(&amp;temp);</span></span>
+<span id="L35"><span class="lineNum">      35</span> <span class="tlaGNC">         443 :   err = sum_equal_exp(*dst, temp, dst, 192);</span></span>
+<span id="L36"><span class="lineNum">      36</span> <span class="tlaGNC">         443 :   return err;</span></span>
+<span id="L37"><span class="lineNum">      37</span>              : }</span>
+<span id="L38"><span class="lineNum">      38</span>              : </span>
+<span id="L39"><span class="lineNum">      39</span> <span class="tlaGNC">       67873 : int shuffle_big_dec_left(s21_big_decimal *dst) {</span></span>
+<span id="L40"><span class="lineNum">      40</span> <span class="tlaGNC">       67873 :   int err = 1;</span></span>
+<span id="L41"><span class="lineNum">      41</span> <span class="tlaGNC">       67873 :   int flag_plus = 0;</span></span>
+<span id="L42"><span class="lineNum">      42</span> <span class="tlaGNC">      475111 :   for (int i = 0; i &lt; 6; ++i) {</span></span>
+<span id="L43"><span class="lineNum">      43</span> <span class="tlaGNC">      407238 :     int temp = 0;</span></span>
+<span id="L44"><span class="lineNum">      44</span> <span class="tlaGNC">      407238 :     flag_plus == 1 ? temp = 1 : 1;</span></span>
+<span id="L45"><span class="lineNum">      45</span> <span class="tlaGNC">      407238 :     if (dst-&gt;bits[i] &amp; (1 &lt;&lt; 31))</span></span>
+<span id="L46"><span class="lineNum">      46</span> <span class="tlaGNC">        4246 :       flag_plus = 1;</span></span>
+<span id="L47"><span class="lineNum">      47</span>              :     else</span>
+<span id="L48"><span class="lineNum">      48</span> <span class="tlaGNC">      402992 :       flag_plus = 0;</span></span>
+<span id="L49"><span class="lineNum">      49</span> <span class="tlaGNC">      407238 :     dst-&gt;bits[i] &lt;&lt;= 1;</span></span>
+<span id="L50"><span class="lineNum">      50</span>              : </span>
+<span id="L51"><span class="lineNum">      51</span> <span class="tlaGNC">      407238 :     if (temp) set_bit(&amp;(dst-&gt;bits[i]), 0, 1);</span></span>
+<span id="L52"><span class="lineNum">      52</span> <span class="tlaGNC">      407238 :   }</span></span>
+<span id="L53"><span class="lineNum">      53</span> <span class="tlaGNC">       67873 :   return err;</span></span>
+<span id="L54"><span class="lineNum">      54</span>              : }</span>
+<span id="L55"><span class="lineNum">      55</span> <span class="tlaGNC">       70158 : void shuffle_big_dec_right(s21_big_decimal *dst) {</span></span>
+<span id="L56"><span class="lineNum">      56</span> <span class="tlaGNC">       70158 :   dst-&gt;bits[0] &gt;&gt;= 1;</span></span>
+<span id="L57"><span class="lineNum">      57</span> <span class="tlaGNC">      420948 :   for (int i = 1; i &lt; 6; ++i) {</span></span>
+<span id="L58"><span class="lineNum">      58</span> <span class="tlaGNC">      350790 :     if (dst-&gt;bits[i] &amp; 1) set_bit(&amp;(dst-&gt;bits[i - 1]), 31, 1);</span></span>
+<span id="L59"><span class="lineNum">      59</span> <span class="tlaGNC">      350790 :     dst-&gt;bits[i] &gt;&gt;= 1;</span></span>
+<span id="L60"><span class="lineNum">      60</span> <span class="tlaGNC">      350790 :   }</span></span>
+<span id="L61"><span class="lineNum">      61</span> <span class="tlaGNC">       70158 : }</span></span>
+<span id="L62"><span class="lineNum">      62</span>              : </span>
+<span id="L63"><span class="lineNum">      63</span> <span class="tlaGNC">       58918 : int sum_equal_exp(s21_big_decimal summand, s21_big_decimal addend,</span></span>
+<span id="L64"><span class="lineNum">      64</span>              :                   s21_big_decimal *result, int last_bit) {</span>
+<span id="L65"><span class="lineNum">      65</span> <span class="tlaGNC">       58918 :   int err = 1;</span></span>
+<span id="L66"><span class="lineNum">      66</span>              :   s21_big_decimal temp;</span>
+<span id="L67"><span class="lineNum">      67</span> <span class="tlaGNC">       58918 :   memset(&amp;temp, 0, 28);</span></span>
+<span id="L68"><span class="lineNum">      68</span> <span class="tlaGNC">       58918 :   memset(result, 0, 28);</span></span>
+<span id="L69"><span class="lineNum">      69</span>              : </span>
+<span id="L70"><span class="lineNum">      70</span> <span class="tlaGNC">       58918 :   set_exp(get_exp(summand.bits[6]), &amp;(result-&gt;bits[6]));</span></span>
+<span id="L71"><span class="lineNum">      71</span> <span class="tlaGNC">       58918 :   int flag_plus = 0;</span></span>
+<span id="L72"><span class="lineNum">      72</span> <span class="tlaGNC">      177947 :   for (int i = 0; i &lt; last_bit / 32 + 1; ++i) {</span></span>
+<span id="L73"><span class="lineNum">      73</span> <span class="tlaGNC">      119029 :     int ind = 0;</span></span>
+<span id="L74"><span class="lineNum">      74</span> <span class="tlaGNC">      119029 :     int flag_local_plus = 0;</span></span>
+<span id="L75"><span class="lineNum">      75</span> <span class="tlaGNC">      119029 :     int bit = 31;</span></span>
+<span id="L76"><span class="lineNum">      76</span> <span class="tlaGNC">      119029 :     i == last_bit / 32 ? bit = last_bit % 32 : 1;</span></span>
+<span id="L77"><span class="lineNum">      77</span> <span class="tlaGNC">      119029 :     last_bit &lt; 32 ? bit = last_bit : 1;</span></span>
+<span id="L78"><span class="lineNum">      78</span> <span class="tlaGNC">     2980534 :     for (int j = 0; j &lt; bit + 1; ++j) {</span></span>
+<span id="L79"><span class="lineNum">      79</span> <span class="tlaGNC">     2861505 :       int s_bite = 0, a_bite = 0;</span></span>
+<span id="L80"><span class="lineNum">      80</span> <span class="tlaGNC">     2861505 :       s_bite = summand.bits[i] &amp; 1;</span></span>
+<span id="L81"><span class="lineNum">      81</span> <span class="tlaGNC">     2861505 :       a_bite = addend.bits[i] &amp; 1;</span></span>
+<span id="L82"><span class="lineNum">      82</span> <span class="tlaGNC">     2861505 :       int summ = a_bite + s_bite + flag_local_plus;</span></span>
+<span id="L83"><span class="lineNum">      83</span> <span class="tlaGNC">     2861505 :       if (flag_plus) {</span></span>
+<span id="L84"><span class="lineNum">      84</span> <span class="tlaGNC">       26746 :         summ += flag_plus;</span></span>
+<span id="L85"><span class="lineNum">      85</span> <span class="tlaGNC">       26746 :         flag_plus = 0;</span></span>
+<span id="L86"><span class="lineNum">      86</span> <span class="tlaGNC">       26746 :       }</span></span>
+<span id="L87"><span class="lineNum">      87</span> <span class="tlaGNC">     2861505 :       if (summ == 1) {</span></span>
+<span id="L88"><span class="lineNum">      88</span> <span class="tlaGNC">      573895 :         flag_local_plus = 0;</span></span>
+<span id="L89"><span class="lineNum">      89</span> <span class="tlaGNC">      573895 :         set_bit(&amp;(result-&gt;bits[i]), ind, 1);</span></span>
+<span id="L90"><span class="lineNum">      90</span> <span class="tlaGNC">     2861505 :       } else if (summ == 2) {</span></span>
+<span id="L91"><span class="lineNum">      91</span> <span class="tlaGNC">     1301076 :         flag_local_plus = 1;</span></span>
+<span id="L92"><span class="lineNum">      92</span> <span class="tlaGNC">     1301076 :         set_bit(&amp;(result-&gt;bits[i]), ind, 0);</span></span>
+<span id="L93"><span class="lineNum">      93</span> <span class="tlaGNC">     2287610 :       } else if (summ == 3) {</span></span>
+<span id="L94"><span class="lineNum">      94</span> <span class="tlaGNC">       10646 :         flag_local_plus = 1;</span></span>
+<span id="L95"><span class="lineNum">      95</span> <span class="tlaGNC">       10646 :         set_bit(&amp;(result-&gt;bits[i]), ind, 1);</span></span>
+<span id="L96"><span class="lineNum">      96</span> <span class="tlaGNC">       10646 :       }</span></span>
+<span id="L97"><span class="lineNum">      97</span> <span class="tlaGNC">     2861505 :       if (j == bit &amp;&amp; flag_local_plus) {</span></span>
+<span id="L98"><span class="lineNum">      98</span> <span class="tlaGNC">       55624 :         flag_plus = 1;</span></span>
+<span id="L99"><span class="lineNum">      99</span> <span class="tlaGNC">       55624 :       }</span></span>
+<span id="L100"><span class="lineNum">     100</span> <span class="tlaGNC">     2861505 :       ++ind;</span></span>
+<span id="L101"><span class="lineNum">     101</span> <span class="tlaGNC">     2861505 :       summand.bits[i] &gt;&gt;= 1;</span></span>
+<span id="L102"><span class="lineNum">     102</span> <span class="tlaGNC">     2861505 :       addend.bits[i] &gt;&gt;= 1;</span></span>
+<span id="L103"><span class="lineNum">     103</span> <span class="tlaGNC">     2861505 :     }</span></span>
+<span id="L104"><span class="lineNum">     104</span> <span class="tlaGNC">      119029 :   }</span></span>
+<span id="L105"><span class="lineNum">     105</span> <span class="tlaGNC">       58918 :   flag_plus == 1 ? err = 0 : 1;</span></span>
+<span id="L106"><span class="lineNum">     106</span> <span class="tlaGNC">       58918 :   return err;</span></span>
+<span id="L107"><span class="lineNum">     107</span>              : }</span>
+<span id="L108"><span class="lineNum">     108</span>              : </span>
+<span id="L109"><span class="lineNum">     109</span> <span class="tlaGNC">       28896 : int minus_equal_exp(s21_big_decimal red, s21_big_decimal ded,</span></span>
+<span id="L110"><span class="lineNum">     110</span>              :                     s21_big_decimal *result) {</span>
+<span id="L111"><span class="lineNum">     111</span> <span class="tlaGNC">       28896 :   int err = 0;</span></span>
+<span id="L112"><span class="lineNum">     112</span> <span class="tlaGNC">       28896 :   int last_bit = MAX(get_last_bit(ded), get_last_bit(red));</span></span>
+<span id="L113"><span class="lineNum">     113</span> <span class="tlaGNC">       28896 :   memset(result, 0, 28);</span></span>
+<span id="L114"><span class="lineNum">     114</span> <span class="tlaGNC">       28896 :   set_exp(red.bits[6], &amp;(result-&gt;bits[6]));</span></span>
+<span id="L115"><span class="lineNum">     115</span> <span class="tlaGNC">       28896 :   if (!get_sign(red.bits[6]) &amp;&amp; get_sign(ded.bits[6])) {</span></span>
+<span id="L116"><span class="lineNum">     116</span> <span class="tlaGNC">           3 :     s21_negate_big(ded, &amp;ded);  //?</span></span>
+<span id="L117"><span class="lineNum">     117</span> <span class="tlaGNC">           3 :     err = sum_equal_exp(red, ded, result, 120);</span></span>
+<span id="L118"><span class="lineNum">     118</span> <span class="tlaGNC">       28896 :   } else if (get_sign(red.bits[6]) &amp;&amp; !get_sign(ded.bits[6])) {</span></span>
+<span id="L119"><span class="lineNum">     119</span> <span class="tlaGNC">           4 :     s21_negate_big(red, &amp;red);</span></span>
+<span id="L120"><span class="lineNum">     120</span> <span class="tlaGNC">           4 :     err = sum_equal_exp(red, ded, result, 120);</span></span>
+<span id="L121"><span class="lineNum">     121</span> <span class="tlaGNC">           4 :     s21_negate_big(*result, result);</span></span>
+<span id="L122"><span class="lineNum">     122</span> <span class="tlaGNC">       28893 :   } else if (get_sign(red.bits[6]) &amp;&amp; get_sign(ded.bits[6])) {</span></span>
+<span id="L123"><span class="lineNum">     123</span> <span class="tlaGNC">           3 :     s21_negate_big(ded, &amp;ded);</span></span>
+<span id="L124"><span class="lineNum">     124</span> <span class="tlaGNC">           3 :     s21_negate_big(red, &amp;red);</span></span>
+<span id="L125"><span class="lineNum">     125</span> <span class="tlaGNC">           3 :     err = minus_equal_exp(ded, red, result);</span></span>
+<span id="L126"><span class="lineNum">     126</span> <span class="tlaGNC">           3 :   } else {</span></span>
+<span id="L127"><span class="lineNum">     127</span> <span class="tlaGNC">       84879 :     for (int i = 0; i &lt; last_bit / 32 + 1; ++i) {</span></span>
+<span id="L128"><span class="lineNum">     128</span> <span class="tlaGNC">       55993 :       if (i == last_bit / 32) {</span></span>
+<span id="L129"><span class="lineNum">     129</span> <span class="tlaGNC">       28886 :         int bit = last_bit % 32, temp = ded.bits[i];</span></span>
+<span id="L130"><span class="lineNum">     130</span> <span class="tlaGNC">       28886 :         last_bit &lt; 32 ? bit = last_bit : 1;</span></span>
+<span id="L131"><span class="lineNum">     131</span> <span class="tlaGNC">      488186 :         for (int j = 0; j &lt; bit + 1; ++j) {</span></span>
+<span id="L132"><span class="lineNum">     132</span> <span class="tlaGNC">      459300 :           if (temp &amp; 1)</span></span>
+<span id="L133"><span class="lineNum">     133</span> <span class="tlaGNC">       55994 :             set_bit(&amp;ded.bits[i], j, 0);</span></span>
+<span id="L134"><span class="lineNum">     134</span>              :           else</span>
+<span id="L135"><span class="lineNum">     135</span> <span class="tlaGNC">      403306 :             set_bit(&amp;ded.bits[i], j, 1);</span></span>
+<span id="L136"><span class="lineNum">     136</span> <span class="tlaGNC">      459300 :           temp &gt;&gt;= 1;</span></span>
+<span id="L137"><span class="lineNum">     137</span> <span class="tlaGNC">      459300 :         }</span></span>
+<span id="L138"><span class="lineNum">     138</span>              : </span>
+<span id="L139"><span class="lineNum">     139</span> <span class="tlaGNC">       28886 :       } else {</span></span>
+<span id="L140"><span class="lineNum">     140</span> <span class="tlaGNC">       27107 :         ded.bits[i] = ~ded.bits[i];</span></span>
+<span id="L141"><span class="lineNum">     141</span>              :       }</span>
+<span id="L142"><span class="lineNum">     142</span> <span class="tlaGNC">       55993 :     }</span></span>
+<span id="L143"><span class="lineNum">     143</span>              :     s21_big_decimal temp;</span>
+<span id="L144"><span class="lineNum">     144</span> <span class="tlaGNC">       28886 :     memset(&amp;temp, 0, 28);</span></span>
+<span id="L145"><span class="lineNum">     145</span>              : </span>
+<span id="L146"><span class="lineNum">     146</span> <span class="tlaGNC">       28886 :     temp.bits[0] = 1;</span></span>
+<span id="L147"><span class="lineNum">     147</span> <span class="tlaGNC">       28886 :     sum_equal_exp(ded, temp, &amp;ded, last_bit);</span></span>
+<span id="L148"><span class="lineNum">     148</span>              : </span>
+<span id="L149"><span class="lineNum">     149</span> <span class="tlaGNC">       28886 :     int sign = sum_equal_exp(red, ded, result, last_bit);</span></span>
+<span id="L150"><span class="lineNum">     150</span> <span class="tlaGNC">       28886 :     if (sign &amp;&amp; !is_big_dec_zero(ded)) {</span></span>
+<span id="L151"><span class="lineNum">     151</span> <span class="tlaGNC">           8 :       s21_big_decimal temp1 = *result;</span></span>
+<span id="L152"><span class="lineNum">     152</span> <span class="tlaGNC">           8 :       memset(result, 0, 28);</span></span>
+<span id="L153"><span class="lineNum">     153</span> <span class="tlaGNC">          19 :       for (int i = 0; i &lt; last_bit / 32 + 1; ++i) {</span></span>
+<span id="L154"><span class="lineNum">     154</span> <span class="tlaGNC">          11 :         int bit = 31;</span></span>
+<span id="L155"><span class="lineNum">     155</span> <span class="tlaGNC">          11 :         i == last_bit / 32 ? bit = last_bit % 32 : 1;</span></span>
+<span id="L156"><span class="lineNum">     156</span> <span class="tlaGNC">          11 :         last_bit &lt; 32 ? bit = last_bit : 1;</span></span>
+<span id="L157"><span class="lineNum">     157</span> <span class="tlaGNC">         196 :         for (int j = 0; j &lt; bit + 1; ++j) {</span></span>
+<span id="L158"><span class="lineNum">     158</span> <span class="tlaGNC">         185 :           if (!(temp1.bits[i] &amp; 1)) {</span></span>
+<span id="L159"><span class="lineNum">     159</span> <span class="tlaGNC">          98 :             set_bit(&amp;(result-&gt;bits[i]), j, 1);</span></span>
+<span id="L160"><span class="lineNum">     160</span> <span class="tlaGNC">          98 :           }</span></span>
+<span id="L161"><span class="lineNum">     161</span> <span class="tlaGNC">         185 :           temp1.bits[i] &gt;&gt;= 1;</span></span>
+<span id="L162"><span class="lineNum">     162</span> <span class="tlaGNC">         185 :         }</span></span>
+<span id="L163"><span class="lineNum">     163</span> <span class="tlaGNC">          11 :       }</span></span>
+<span id="L164"><span class="lineNum">     164</span> <span class="tlaGNC">           8 :       sum_equal_exp(*result, temp, result, 191);</span></span>
+<span id="L165"><span class="lineNum">     165</span> <span class="tlaGNC">           8 :       s21_negate_big(*result, result);</span></span>
+<span id="L166"><span class="lineNum">     166</span> <span class="tlaGNC">           8 :     }</span></span>
+<span id="L167"><span class="lineNum">     167</span>              :   }</span>
+<span id="L168"><span class="lineNum">     168</span> <span class="tlaGNC">       28896 :   return err;</span></span>
+<span id="L169"><span class="lineNum">     169</span>              : }</span>
+<span id="L170"><span class="lineNum">     170</span>              : </span>
+<span id="L171"><span class="lineNum">     171</span> <span class="tlaGNC">          26 : s21_decimal abs_decimal(s21_decimal val) {</span></span>
+<span id="L172"><span class="lineNum">     172</span> <span class="tlaGNC">          26 :   set_bit(&amp;(val.bits[3]), 31, 0);</span></span>
+<span id="L173"><span class="lineNum">     173</span> <span class="tlaGNC">          26 :   return val;</span></span>
+<span id="L174"><span class="lineNum">     174</span>              : }</span>
+<span id="L175"><span class="lineNum">     175</span>              : </span>
+<span id="L176"><span class="lineNum">     176</span> <span class="tlaGNC">          68 : s21_big_decimal abs_big_decimal(s21_big_decimal val) {</span></span>
+<span id="L177"><span class="lineNum">     177</span> <span class="tlaGNC">          68 :   set_bit(&amp;(val.bits[6]), 31, 0);</span></span>
+<span id="L178"><span class="lineNum">     178</span> <span class="tlaGNC">          68 :   return val;</span></span>
+<span id="L179"><span class="lineNum">     179</span>              : }</span>
+<span id="L180"><span class="lineNum">     180</span>              : </span>
+<span id="L181"><span class="lineNum">     181</span> <span class="tlaGNC">       89824 : int get_last_bit(s21_big_decimal val) {</span></span>
+<span id="L182"><span class="lineNum">     182</span> <span class="tlaGNC">       89824 :   int result = 0;</span></span>
+<span id="L183"><span class="lineNum">     183</span> <span class="tlaGNC">    17336032 :   for (int i = 0; i &lt; 192; ++i) {</span></span>
+<span id="L184"><span class="lineNum">     184</span> <span class="tlaGNC">    17246208 :     if (val.bits[i / 32] &amp; 1) result = i;</span></span>
+<span id="L185"><span class="lineNum">     185</span> <span class="tlaGNC">    17246208 :     val.bits[i / 32] &gt;&gt;= 1;</span></span>
+<span id="L186"><span class="lineNum">     186</span> <span class="tlaGNC">    17246208 :   }</span></span>
+<span id="L187"><span class="lineNum">     187</span> <span class="tlaGNC">       89824 :   return result;</span></span>
+<span id="L188"><span class="lineNum">     188</span>              : }</span>
+<span id="L189"><span class="lineNum">     189</span>              : </span>
+<span id="L190"><span class="lineNum">     190</span> <span class="tlaGNC">          59 : int is_dec_zero(s21_decimal data) {</span></span>
+<span id="L191"><span class="lineNum">     191</span> <span class="tlaGNC">          59 :   int res = 0;</span></span>
+<span id="L192"><span class="lineNum">     192</span> <span class="tlaGNC">          59 :   if (data.bits[0] == 0 &amp;&amp; data.bits[1] == 0 &amp;&amp; data.bits[2] == 0) res = 1;</span></span>
+<span id="L193"><span class="lineNum">     193</span> <span class="tlaGNC">          59 :   return res;</span></span>
+<span id="L194"><span class="lineNum">     194</span>              : }</span>
+<span id="L195"><span class="lineNum">     195</span> <span class="tlaGNC">        2507 : int is_big_dec_zero(s21_big_decimal data) {</span></span>
+<span id="L196"><span class="lineNum">     196</span> <span class="tlaGNC">        2507 :   int res = 1;</span></span>
+<span id="L197"><span class="lineNum">     197</span> <span class="tlaGNC">       17549 :   for (int i = 0; i &lt; 6; ++i) data.bits[i] != 0 ? res = 0 : 1;</span></span>
+<span id="L198"><span class="lineNum">     198</span> <span class="tlaGNC">        2507 :   return res;</span></span>
+<span id="L199"><span class="lineNum">     199</span>              : }</span>
+<span id="L200"><span class="lineNum">     200</span>              : </span>
+<span id="L201"><span class="lineNum">     201</span> <span class="tlaGNC">         106 : int convert_big_to_dec(s21_big_decimal val, s21_decimal *result, int exp,</span></span>
+<span id="L202"><span class="lineNum">     202</span>              :                        int op) {</span>
+<span id="L203"><span class="lineNum">     203</span> <span class="tlaGNC">         106 :   int err = 0, counter = 0;</span></span>
+<span id="L204"><span class="lineNum">     204</span> <span class="tlaGNC">         106 :   int sign = get_sign(val.bits[6]) ? 1 : 0;</span></span>
+<span id="L205"><span class="lineNum">     205</span> <span class="tlaGNC">         106 :   if (sign) s21_negate_big(val, &amp;val);</span></span>
+<span id="L206"><span class="lineNum">     206</span> <span class="tlaGNC">         106 :   s21_big_decimal temp = {0};</span></span>
+<span id="L207"><span class="lineNum">     207</span> <span class="tlaGNC">         106 :   if ((val.bits[3] &gt; 0 || val.bits[4] &gt; 0 || val.bits[5] &gt; 0) &amp;&amp; exp &gt; 0) {</span></span>
+<span id="L208"><span class="lineNum">     208</span> <span class="tlaGNC">          16 :     while ((val.bits[3] &gt; 0 || val.bits[4] &gt; 0 || val.bits[5] &gt; 0) &amp;&amp; exp &gt; 0) {</span></span>
+<span id="L209"><span class="lineNum">     209</span> <span class="tlaGNC">           8 :       temp = div10(&amp;val);</span></span>
+<span id="L210"><span class="lineNum">     210</span> <span class="tlaGNC">           8 :       --exp;</span></span>
+<span id="L211"><span class="lineNum">     211</span> <span class="tlaGNC">           8 :       if (temp.bits[0] != 0) ++counter;</span></span>
+<span id="L212"><span class="lineNum">     212</span>              :     }</span>
+<span id="L213"><span class="lineNum">     213</span> <span class="tlaGNC">           8 :   }</span></span>
+<span id="L214"><span class="lineNum">     214</span> <span class="tlaGNC">         106 :   if (exp &gt; 28) {</span></span>
+<span id="L215"><span class="lineNum">     215</span> <span class="tlaGNC">          38 :     while (exp &gt; 28) {</span></span>
+<span id="L216"><span class="lineNum">     216</span> <span class="tlaGNC">          32 :       temp = div10(&amp;val);</span></span>
+<span id="L217"><span class="lineNum">     217</span> <span class="tlaGNC">          32 :       ++counter;</span></span>
+<span id="L218"><span class="lineNum">     218</span> <span class="tlaGNC">          32 :       --exp;</span></span>
+<span id="L219"><span class="lineNum">     219</span>              :     }</span>
+<span id="L220"><span class="lineNum">     220</span> <span class="tlaGNC">         106 :   } else if (exp &lt; 0) {</span></span>
+<span id="L221"><span class="lineNum">     221</span> <span class="tlaGNC">           5 :     while (val.bits[2] &lt;= 429496729 &amp;&amp; exp &lt; 0 &amp;&amp; val.bits[3] == 0 &amp;&amp;</span></span>
+<span id="L222"><span class="lineNum">     222</span> <span class="tlaGNC">           1 :            val.bits[4] == 0 &amp;&amp; val.bits[5] == 0) {</span></span>
+<span id="L223"><span class="lineNum">     223</span> <span class="tlaGNC">           1 :       ++exp;</span></span>
+<span id="L224"><span class="lineNum">     224</span> <span class="tlaGNC">           1 :       _x10(&amp;val);</span></span>
+<span id="L225"><span class="lineNum">     225</span>              :     }</span>
+<span id="L226"><span class="lineNum">     226</span> <span class="tlaGNC">           3 :   }</span></span>
+<span id="L227"><span class="lineNum">     227</span> <span class="tlaGNC">         182 :   if (exp &lt; 0 ||</span></span>
+<span id="L228"><span class="lineNum">     228</span> <span class="tlaGNC">         104 :       (exp == 0 &amp;&amp; (val.bits[3] &gt; 0 || val.bits[4] &gt; 0 || val.bits[5] &gt; 0)))</span></span>
+<span id="L229"><span class="lineNum">     229</span> <span class="tlaGNC">           8 :     err = sign ? 2 : 1;</span></span>
+<span id="L230"><span class="lineNum">     230</span>              : </span>
+<span id="L231"><span class="lineNum">     231</span> <span class="tlaGNC">         106 :   if ((temp.bits[0] &gt; 5 || (temp.bits[0] == 5 &amp;&amp; counter &gt; 1) ||</span></span>
+<span id="L232"><span class="lineNum">     232</span> <span class="tlaGNC">          97 :        (temp.bits[0] &gt; 4 &amp;&amp; !op)) &amp;&amp;</span></span>
+<span id="L233"><span class="lineNum">     233</span> <span class="tlaGNC">           9 :       !err) {</span></span>
+<span id="L234"><span class="lineNum">     234</span> <span class="tlaGNC">           8 :     temp.bits[0] = 1;</span></span>
+<span id="L235"><span class="lineNum">     235</span> <span class="tlaGNC">           8 :     sum_equal_exp(val, temp, &amp;val, 191);</span></span>
+<span id="L236"><span class="lineNum">     236</span> <span class="tlaGNC">         106 :   } else if (temp.bits[0] == 5 &amp;&amp; !err &amp;&amp; counter == 1)</span></span>
+<span id="L237"><span class="lineNum">     237</span> <span class="tlaGNC">           1 :     bank_round(val, &amp;val);</span></span>
+<span id="L238"><span class="lineNum">     238</span>              : </span>
+<span id="L239"><span class="lineNum">     239</span> <span class="tlaGNC">         106 :   if ((val.bits[3] &gt; 0 || val.bits[4] &gt; 0 || val.bits[5] &gt; 0) &amp;&amp; err == 0)</span></span>
+<span id="L240"><span class="lineNum">     240</span> <span class="tlaUNC tlaBgUNC">           0 :     err = convert_big_to_dec(val, result, exp, op);</span></span>
+<span id="L241"><span class="lineNum">     241</span> <span class="tlaGNC tlaBgGNC">         106 :   if (err == 0) {</span></span>
+<span id="L242"><span class="lineNum">     242</span> <span class="tlaGNC">          98 :     set_exp(exp, &amp;(val.bits[6]));</span></span>
+<span id="L243"><span class="lineNum">     243</span> <span class="tlaGNC">         392 :     for (int i = 0; i &lt; 3; ++i) {</span></span>
+<span id="L244"><span class="lineNum">     244</span> <span class="tlaGNC">         294 :       result-&gt;bits[i] = val.bits[i];</span></span>
+<span id="L245"><span class="lineNum">     245</span> <span class="tlaGNC">         294 :     }</span></span>
+<span id="L246"><span class="lineNum">     246</span> <span class="tlaGNC">          98 :     result-&gt;bits[3] = val.bits[6];</span></span>
+<span id="L247"><span class="lineNum">     247</span> <span class="tlaGNC">          98 :     if (sign) s21_negate(*result, result);</span></span>
+<span id="L248"><span class="lineNum">     248</span> <span class="tlaGNC">          98 :   }</span></span>
+<span id="L249"><span class="lineNum">     249</span> <span class="tlaGNC">         106 :   return err;</span></span>
+<span id="L250"><span class="lineNum">     250</span>              : }</span>
+<span id="L251"><span class="lineNum">     251</span>              : </span>
+<span id="L252"><span class="lineNum">     252</span> <span class="tlaGNC">         487 : s21_big_decimal convert_dec_to_big(s21_decimal val) {</span></span>
+<span id="L253"><span class="lineNum">     253</span>              :   s21_big_decimal res;</span>
+<span id="L254"><span class="lineNum">     254</span> <span class="tlaGNC">         487 :   memset(&amp;res, 0, 28);</span></span>
+<span id="L255"><span class="lineNum">     255</span> <span class="tlaGNC">        1948 :   for (int i = 0; i &lt; 3; ++i) {</span></span>
+<span id="L256"><span class="lineNum">     256</span> <span class="tlaGNC">        1461 :     res.bits[i] = val.bits[i];</span></span>
+<span id="L257"><span class="lineNum">     257</span> <span class="tlaGNC">        1461 :   }</span></span>
+<span id="L258"><span class="lineNum">     258</span> <span class="tlaGNC">         487 :   res.bits[6] = val.bits[3];</span></span>
+<span id="L259"><span class="lineNum">     259</span> <span class="tlaGNC">         487 :   return res;</span></span>
+<span id="L260"><span class="lineNum">     260</span>              : }</span>
+<span id="L261"><span class="lineNum">     261</span>              : </span>
+<span id="L262"><span class="lineNum">     262</span> <span class="tlaGNC">       67526 : void make_equal_exp(s21_big_decimal *val1, s21_big_decimal *val2) {</span></span>
+<span id="L263"><span class="lineNum">     263</span> <span class="tlaGNC">       67526 :   int exp1 = 0, exp2 = 0;</span></span>
+<span id="L264"><span class="lineNum">     264</span> <span class="tlaGNC">       67526 :   exp1 = get_exp(val1-&gt;bits[6]);</span></span>
+<span id="L265"><span class="lineNum">     265</span> <span class="tlaGNC">       67526 :   exp2 = get_exp(val2-&gt;bits[6]);</span></span>
+<span id="L266"><span class="lineNum">     266</span> <span class="tlaGNC">       67526 :   int sign1 = get_sign(val1-&gt;bits[6]);</span></span>
+<span id="L267"><span class="lineNum">     267</span> <span class="tlaGNC">       67526 :   int sign2 = get_sign(val2-&gt;bits[6]);</span></span>
+<span id="L268"><span class="lineNum">     268</span>              : </span>
+<span id="L269"><span class="lineNum">     269</span> <span class="tlaGNC">       67526 :   if (exp1 &gt; exp2) {</span></span>
+<span id="L270"><span class="lineNum">     270</span> <span class="tlaGNC">          34 :     *val1 = abs_big_decimal(*val1);</span></span>
+<span id="L271"><span class="lineNum">     271</span> <span class="tlaGNC">          34 :     *val2 = abs_big_decimal(*val2);</span></span>
+<span id="L272"><span class="lineNum">     272</span> <span class="tlaGNC">         132 :     while (exp1 &gt; exp2) {</span></span>
+<span id="L273"><span class="lineNum">     273</span> <span class="tlaGNC">          98 :       _x10(val2);</span></span>
+<span id="L274"><span class="lineNum">     274</span> <span class="tlaGNC">          98 :       ++exp2;</span></span>
+<span id="L275"><span class="lineNum">     275</span>              :     }</span>
+<span id="L276"><span class="lineNum">     276</span> <span class="tlaGNC">          34 :     set_exp(exp1, &amp;(val2-&gt;bits[6]));</span></span>
+<span id="L277"><span class="lineNum">     277</span> <span class="tlaGNC">          34 :     if (sign1) s21_negate_big(*val1, val1);</span></span>
+<span id="L278"><span class="lineNum">     278</span> <span class="tlaGNC">          34 :     if (sign2) s21_negate_big(*val2, val2);</span></span>
+<span id="L279"><span class="lineNum">     279</span>              : </span>
+<span id="L280"><span class="lineNum">     280</span> <span class="tlaGNC">       67526 :   } else if (exp2 &gt; exp1) {</span></span>
+<span id="L281"><span class="lineNum">     281</span> <span class="tlaGNC">          25 :     make_equal_exp(val2, val1);</span></span>
+<span id="L282"><span class="lineNum">     282</span> <span class="tlaGNC">          25 :   }</span></span>
+<span id="L283"><span class="lineNum">     283</span> <span class="tlaGNC">       67526 : }</span></span>
+<span id="L284"><span class="lineNum">     284</span>              : </span>
+<span id="L285"><span class="lineNum">     285</span> <span class="tlaGNC">           6 : void plus_one_big(s21_big_decimal *val) {</span></span>
+<span id="L286"><span class="lineNum">     286</span>              :   s21_big_decimal one;</span>
+<span id="L287"><span class="lineNum">     287</span> <span class="tlaGNC">           6 :   memset(&amp;one, 0, 28);</span></span>
+<span id="L288"><span class="lineNum">     288</span> <span class="tlaGNC">           6 :   one.bits[0] = 1;</span></span>
+<span id="L289"><span class="lineNum">     289</span> <span class="tlaGNC">           6 :   sum_equal_exp(*val, one, val, 191);</span></span>
+<span id="L290"><span class="lineNum">     290</span> <span class="tlaGNC">           6 : }</span></span>
+<span id="L291"><span class="lineNum">     291</span>              : </span>
+<span id="L292"><span class="lineNum">     292</span> <span class="tlaGNC">           1 : void bank_round(s21_big_decimal val, s21_big_decimal *result) {</span></span>
+<span id="L293"><span class="lineNum">     293</span> <span class="tlaGNC">           1 :   s21_big_decimal temp = {0};</span></span>
+<span id="L294"><span class="lineNum">     294</span> <span class="tlaGNC">           1 :   temp = div10(&amp;val);</span></span>
+<span id="L295"><span class="lineNum">     295</span> <span class="tlaGNC">           1 :   if (temp.bits[0] % 2 == 1) {</span></span>
+<span id="L296"><span class="lineNum">     296</span> <span class="tlaUNC tlaBgUNC">           0 :     temp.bits[0] = 1;</span></span>
+<span id="L297"><span class="lineNum">     297</span> <span class="tlaUNC">           0 :     sum_equal_exp(temp, *result, result, 191);</span></span>
+<span id="L298"><span class="lineNum">     298</span> <span class="tlaUNC">           0 :   }</span></span>
+<span id="L299"><span class="lineNum">     299</span> <span class="tlaGNC tlaBgGNC">           1 : }</span></span>
+        </pre>
+              </td>
+            </tr>
+          </table>
+          <br>
+
+          <table width="100%" border=0 cellspacing=0 cellpadding=0>
+            <tr><td class="ruler"><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+            <tr><td class="versionInfo">Generated by: <a href="https://github.com//linux-test-project/lcov" target="_parent">LCOV version 2.0-1</a></td></tr>
+          </table>
+          <br>
+
+</body>
+</html>
